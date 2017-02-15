@@ -2,10 +2,19 @@ close all
 
 %load meshes
 mesh1 = pcread('./models/bunny/data/bun000.ply');
-mesh2 = pcread('./models/bunny/data/bun045.ply');
 
-%Calculate rotated, translated mesh until convergence (the difference
-%between successive outputs is less than a threshold)
+%Rotate mesh
+rot = 80;
+
+A = [cosd(rot) sind(rot) 0 0; ...
+    -sind(rot) cosd(rot) 0 0; ...
+    0 0 1 0; ...
+    0 0 0 1];
+
+tform = affine3d(A);
+
+mesh2 = pctransform(mesh1,tform);
+
 oldOutputMesh = ICP(mesh1,mesh2); 
 difference = 100;
 counter = 0;

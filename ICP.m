@@ -1,4 +1,6 @@
-function [ outputMesh ] = closestPoints( mesh1,mesh2 )
+function [ outputMesh ] = ICP( mesh1,mesh2 )
+
+    subsampleCount = 1;
 
     %Get data from the 2 meshes
     originalPoints1 = mesh1.Location;
@@ -8,7 +10,7 @@ function [ outputMesh ] = closestPoints( mesh1,mesh2 )
     meshSize2 = mesh2.Count;
     
     %Randomly subsample from the meshes using 1/10th of the data available
-    pointAmount = ceil(mesh1.Count/10);
+    pointAmount = ceil(mesh1.Count/subsampleCount);
     
     points1 = zeros(pointAmount,3);
     points2 = zeros(pointAmount,3);

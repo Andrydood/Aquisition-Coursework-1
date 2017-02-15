@@ -4,8 +4,13 @@ close all
 mesh1 = pcread('./models/bunny/data/bun000.ply');
 mesh2 = pcread('./models/bunny/data/bun045.ply');
 
+%Add noise
+mesh2 = addNoise(mesh2, 0.01);
+
 %Calculate rotated, translated mesh until convergence (the difference
-%between successive outputs is less than a threshold)
+%between successive outputs is less than a threshold) or if 100 iterations
+%have passed
+
 oldOutputMesh = ICP(mesh1,mesh2); 
 difference = 100;
 counter = 0;
