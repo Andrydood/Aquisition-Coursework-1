@@ -1,4 +1,4 @@
-function [ outputMesh ] = ICPSubsample( mesh1,mesh2, subsampleCount)
+function [ outputMesh ] = ICPSubsample( mesh1,mesh2, subsamplePercent)
 
     %Get data from the 2 meshes
     originalPoints1 = mesh1.Location;
@@ -8,7 +8,7 @@ function [ outputMesh ] = ICPSubsample( mesh1,mesh2, subsampleCount)
     meshSize2 = mesh2.Count;
     
     %Randomly subsample from the meshes using 1/10th of the data available
-    pointAmount = ceil(mesh1.Count);
+    pointAmount = ceil(mesh1.Count*subsamplePercent);
     
     points1 = zeros(pointAmount,3);
     points2 = zeros(pointAmount,3);
