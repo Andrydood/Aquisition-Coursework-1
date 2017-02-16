@@ -8,13 +8,15 @@ mesh2 = pcread('./models/bunny/data/bun045.ply');
 %between successive outputs is less than a threshold)
 oldOutputMesh = ICP(mesh1,mesh2); 
 difference = 100;
+counter = 0;
 
 while(difference>5 && counter<200)
     
     newOutputMesh = ICP(mesh1,oldOutputMesh); 
     difference = checkDifference(newOutputMesh,oldOutputMesh);
     oldOutputMesh = newOutputMesh;
-    
+    counter = counter + 1;
+
 end
 
 %Show meshes before transform
