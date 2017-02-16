@@ -58,6 +58,7 @@ function [ outputMesh ] = ICPNormals( mesh1,mesh2 )
     %Solve for Ax=b
     x = (A'*A)\(A'*b);
     
+    %Create transformation matrix
     transform = makehgtform('xrotate',x(1),'yrotate',x(2),'zrotate',x(3),'translate',[x(4) x(5) x(6)]);
     
     outputMesh = pctransform(mesh2,affine3d(transform'));
