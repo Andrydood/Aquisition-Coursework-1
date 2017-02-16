@@ -47,19 +47,14 @@ function [ outputMesh ] = ICPNormals( mesh1,mesh2 )
     
     A = zeros(pointAmount,6);
     b = zeros(pointAmount,1);
-    
-    B = zeros(pointAmount,1);
-    A1 = B;
-    A2 = B;
-    A3 = B;
+
     for i = 1:pointAmount
         
         A(i,:) = [cross(points2_new(i,:),normals(i,:)) normals(i,:)];
         b(i,:) = dot(-(points2_new(i,:)-points1(i,:)),normals(i,:));
        
     end
-    A_m = [A1 A2 A3 normals(1:pointAmount,:)];
-    
+
     %Solve for Ax=b
     x = (A'*A)\(A'*b);
     
