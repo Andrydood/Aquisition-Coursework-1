@@ -4,16 +4,9 @@ close all
 mesh1 = pcread('./models/bunny/data/bun000.ply');
 
 %Rotate mesh
-rot = 80;
+rot = 75;
 
-A = [cosd(rot) sind(rot) 0 0; ...
-    -sind(rot) cosd(rot) 0 0; ...
-    0 0 1 0; ...
-    0 0 0 1];
-
-tform = affine3d(A);
-
-mesh2 = pctransform(mesh1,tform);
+mesh2 = rotateMesh(mesh1,rot,'z');
 
 oldOutputMesh = ICP(mesh1,mesh2); 
 difference = 100;
